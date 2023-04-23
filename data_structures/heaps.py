@@ -67,6 +67,7 @@ class MinHeap(object):
             raise Exception(f'No element to peek, heap size = {self.size}')
         
         root = self.items[0]
+        self.items[0] = self.items.pop()
         self.size -= 1
         self.heapify_down()
         return root
@@ -86,7 +87,7 @@ class MinHeap(object):
         """ we just check for left child becuse if there is not left
         child then theree is not a right child """
         while(self.has_left_child(index)):
-            smaller_child_index = self.get_left_child_index()
+            smaller_child_index = self.get_left_child_index(index)
             
             if( self.has_right_child(index) and self.get_right_child(index) < self.get_left_child(index) ):
                 smaller_child_index = self.get_right_child_index(index)  
@@ -130,7 +131,7 @@ class MaxHeap(MinHeap):
         index = 0
 
         while(self.has_left_child(index)):
-            bigger_child_index = self.get_left_child_index()
+            bigger_child_index = self.get_left_child_index(index)
             
             if( self.has_right_child(index) and self.get_right_child(index) > self.get_left_child(index) ):
                 bigger_child_index = self.get_right_child_index(index)  
