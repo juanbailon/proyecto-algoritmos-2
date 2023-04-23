@@ -112,5 +112,35 @@ class MinHeap(object):
         return f'MinHeap-items: {self.items}'
     
 
+
+
+class MaxHeap(MinHeap):
+
+    def heapify_up(self) -> None:
+        """ Same as the one from MinHeap, except for the conditional in the while loop """
+        index = self.size - 1
+
+        while(self.has_parent(index) and (self.get_parent(index) < self.items[index]) ):
+            self.swap(self.get_parent_index(index), index)
+            index = self.get_parent_index(index)
+    
+
+    def heapify_down(self) -> None:
+        """ Same as the one from MinHeap, except for the conditionals in the if staments """        
+        index = 0
+
+        while(self.has_left_child(index)):
+            bigger_child_index = self.get_left_child_index()
+            
+            if( self.has_right_child(index) and self.get_right_child(index) > self.get_left_child(index) ):
+                bigger_child_index = self.get_right_child_index(index)  
+
+            if(self.items[index] > self.items[bigger_child_index]):
+                break
+            else:
+                self.swap(index, bigger_child_index)
+                index = bigger_child_index
     
     
+    def __str__(self) -> str:        
+        return f'MaxHeap-items: {self.items}'
