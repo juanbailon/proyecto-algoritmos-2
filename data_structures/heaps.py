@@ -1,5 +1,5 @@
 import math
-from typing import Union
+from typing import Union, List
 
 class MinHeap(object):
     """ 
@@ -67,7 +67,11 @@ class MinHeap(object):
             raise Exception(f'No element to peek, heap size = {self.size}')
         
         root = self.items[0]
-        self.items[0] = self.items.pop()
+        if(self.size == 1):
+            self.items.pop()
+        else:
+            self.items[0] = self.items.pop()
+        
         self.size -= 1
         self.heapify_down()
         return root
@@ -145,3 +149,4 @@ class MaxHeap(MinHeap):
     
     def __str__(self) -> str:        
         return f'MaxHeap-items: {self.items}'
+    
